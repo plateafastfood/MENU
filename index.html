@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Platea Fast Food</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --red: #CC1111;
+      --red-dark: #9e0d0d;
+      --black: #111111;
+      --white: #FFFFFF;
+      --gray: #f5f5f5;
+      --border: #e0e0e0;
+      --text: #1a1a1a;
+      --muted: #666;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text);
+    }
+
+    /* HEADER */
+    header {
+      background: var(--black);
+      color: var(--white);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1;
+      text-decoration: none;
+    }
+
+    .logo-main {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 34px;
+      letter-spacing: 2px;
+      color: transparent;
+      -webkit-text-stroke: 2px #ffffff;
+      text-stroke: 2px #ffffff;
+      line-height: 1;
+      text-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+    }
+
+    .logo-sub {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.85);
+      text-stroke: 1px rgba(255,255,255,0.85);
+      text-transform: uppercase;
+      margin-top: -2px;
+    }
+
+    .lang-btn {
+      background: var(--red);
+      color: var(--white);
+      border: none;
+      border-radius: 6px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: background 0.2s;
+    }
+
+    .lang-btn:hover { background: var(--red-dark); }
+
+    /* HERO */
+    .hero {
+      background: var(--red);
+      color: var(--white);
+      text-align: center;
+      padding: 48px 20px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40px; left: -40px; right: -40px; bottom: -40px;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 20px,
+        rgba(0,0,0,0.04) 20px,
+        rgba(0,0,0,0.04) 40px
+      );
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 14vw, 96px);
+      letter-spacing: 6px;
+      line-height: 1;
+      position: relative;
+    }
+
+    .hero h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(14px, 3vw, 20px);
+      font-weight: 500;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-top: 4px;
+      position: relative;
+    }
+
+    .hero .tagline {
+      font-size: 15px;
+      margin-top: 14px;
+      opacity: 0.9;
+      font-weight: 500;
+      letter-spacing: 1px;
+      position: relative;
+    }
+
+    /* CALL BUTTON */
+    .call-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 22px;
+      background: var(--white);
+      color: var(--red);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 17px;
+      padding: 14px 32px;
+      border-radius: 50px;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      transition: transform 0.15s, box-shadow 0.15s;
+      letter-spacing: 0.5px;
+    }
+
+    .call-btn:hover, .call-btn:active {
+      transform: scale(0.97);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .call-btn .call-icon {
+      font-size: 20px;
+      animation: ring 1.5s infinite;
+    }
+
+    @keyframes ring {
+      0%, 100% { transform: rotate(0deg); }
+      10% { transform: rotate(-15deg); }
+      20% { transform: rotate(15deg); }
+      30% { transform: rotate(-10deg); }
+      40% { transform: rotate(10deg); }
+      50% { transform: rotate(0deg); }
+    }
+
+    /* INFO BAR */
+    .info-bar {
+      background: var(--black);
+      color: var(--white);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 24px;
+      font-size: 13px;
+      border-right: 1px solid #2a2a2a;
+    }
+
+    .info-item:last-child { border-right: none; }
+
+    .info-item a {
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .info-item a:hover { color: var(--red); }
+
+    .info-icon {
+      font-size: 16px;
+    }
+
+    /* MENU NAV */
+    .menu-nav {
+      background: var(--white);
+      border-bottom: 2px solid var(--border);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+      position: sticky;
+      top: 60px;
+      z-index: 90;
+    }
+
+    .menu-nav-inner {
+      display: inline-flex;
+      padding: 0 16px;
+    }
+
+    .menu-nav a {
+      display: inline-block;
+      padding: 14px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      letter-spacing: 0.3px;
+    }
+
+    .menu-nav a:hover, .menu-nav a.active {
+      color: var(--red);
+      border-bottom-color: var(--red);
+    }
+
+    /* MENU SECTIONS */
+    .menu-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+    }
+
+    .menu-section {
+      margin-top: 40px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid var(--black);
+    }
+
+    .section-icon {
+      font-size: 26px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 2px;
+      color: var(--black);
+    }
+
+    .section-badge {
+      margin-left: auto;
+      background: var(--red);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* MENU ITEMS */
+    .menu-items {
+      display: grid;
+      gap: 10px;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--gray);
+      border-radius: 10px;
+      padding: 14px 16px;
+      border-left: 4px solid transparent;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .menu-item:hover {
+      border-left-color: var(--red);
+      box-shadow: 0 2px 10px rgba(204,17,17,0.1);
+    }
+
+    .item-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .item-name-en {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    .item-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      color: var(--red);
+      letter-spacing: 1px;
+      white-space: nowrap;
+      margin-left: 12px;
+    }
+
+    /* COMING SOON */
+    .coming-soon {
+      text-align: center;
+      padding: 30px;
+      color: var(--muted);
+      font-size: 14px;
+      background: var(--gray);
+      border-radius: 10px;
+      border: 2px dashed var(--border);
+    }
+
+    .coming-soon span {
+      font-size: 30px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      color: #aaa;
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 13px;
+    }
+
+    footer strong {
+      color: var(--red);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    /* SCROLLBAR for menu nav */
+    .menu-nav::-webkit-scrollbar { height: 3px; }
+    .menu-nav::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+
+    @media (max-width: 600px) {
+      .info-item { padding: 12px 16px; font-size: 12px; }
+      .menu-item { padding: 12px 14px; }
+      .item-name { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-main">PLATÉA</div>
+        <div class="logo-sub">FASTFOOD</div>
+      </div>
+      <button class="lang-btn" onclick="toggleLang()" id="langBtn">🇬🇧 English</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>PLATEA</h1>
+    <h2>fast food</h2>
+    <p class="tagline" id="heroTagline">Γεύσεις που αγαπάς — Κάτω Αχαΐα</p>
+    <a href="tel:2693025350" class="call-btn">
+      <span class="call-icon">📞</span>
+      <span id="callBtnText">Καλέστε μας</span>
+    </a>
+  </div>
+
+  <!-- INFO BAR -->
+  <div class="info-bar">
+    <div class="info-item">
+      <span class="info-icon">📍</span>
+      <span>Αποστόλου Ανδρέα 14, Κάτω Αχαΐα 25200</span>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">📞</span>
+      <span>
+        <a href="tel:2693023398">2693023398</a> &nbsp;|&nbsp;
+        <a href="tel:2693025350">2693025350</a>
+      </span>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">🕐</span>
+      <span id="hoursText">Καθημερινά 11:00 – 01:00</span>
+    </div>
+  </div>
+
+  <!-- MENU NAVIGATION -->
+  <nav class="menu-nav">
+    <div class="menu-nav-inner">
+      <a href="#pita" id="nav-pita">🥙 Πίτα Γύρο</a>
+      <a href="#sandwich" id="nav-sandwich">🥪 Sandwich</a>
+      <a href="#merides" id="nav-merides">🍽️ Μερίδες</a>
+      <a href="#salates" id="nav-salates">🥗 Σαλάτες</a>
+      <a href="#oreктika" id="nav-orektika">🍟 Ορεκτικά</a>
+      <a href="#spageti" id="nav-spageti">🍝 Μακαρονάδες</a>
+      <a href="#pizza" id="nav-pizza">🍕 Pizza</a>
+      <a href="#burger" id="nav-burger">🍔 Burger</a>
+      <a href="#drinks" id="nav-drinks">🥤 Αναψυκτικά</a>
+    </div>
+  </nav>
+
+  <!-- MENU -->
+  <div class="menu-container">
+
+    <!-- PITA GYRO -->
+    <div class="menu-section" id="pita">
+      <div class="section-header">
+        <span class="section-icon">🥙</span>
+        <span class="section-title" id="title-pita">ΠΙΤΑ ΓΥΡΟ</span>
+      </div>
+      <div class="menu-items" id="items-pita"></div>
+    </div>
+
+    <!-- SANDWICH -->
+    <div class="menu-section" id="sandwich">
+      <div class="section-header">
+        <span class="section-icon">🥪</span>
+        <span class="section-title" id="title-sandwich">SANDWICH</span>
+        
+      </div>
+      <div class="menu-items" id="items-sandwich"></div>
+    </div>
+
+    <!-- MERIDES -->
+    <div class="menu-section" id="merides">
+      <div class="section-header">
+        <span class="section-icon">🍽️</span>
+        <span class="section-title" id="title-merides">ΜΕΡΙΔΕΣ</span>
+        
+      </div>
+      <div class="menu-items" id="items-merides"></div>
+    </div>
+
+    <!-- SALATES -->
+    <div class="menu-section" id="salates">
+      <div class="section-header">
+        <span class="section-icon">🥗</span>
+        <span class="section-title" id="title-salates">ΣΑΛΑΤΕΣ</span>
+      </div>
+      <div class="menu-items" id="items-salates"></div>
+    </div>
+
+    <!-- OREKTIKA -->
+    <div class="menu-section" id="oreктika">
+      <div class="section-header">
+        <span class="section-icon">🍟</span>
+        <span class="section-title" id="title-orektika">ΟΡΕΚΤΙΚΑ</span>
+      </div>
+      <div class="menu-items" id="items-orektika"></div>
+    </div>
+
+    <!-- MAKARONADES -->
+    <div class="menu-section" id="spageti">
+      <div class="section-header">
+        <span class="section-icon">🍝</span>
+        <span class="section-title" id="title-spageti">ΜΑΚΑΡΟΝΑΔΕΣ</span>
+      </div>
+      <div class="menu-items" id="items-spageti"></div>
+    </div>
+
+    <!-- PIZZA -->
+    <div class="menu-section" id="pizza">
+      <div class="section-header">
+        <span class="section-icon">🍕</span>
+        <span class="section-title" id="title-pizza">PIZZA</span>
+      </div>
+      <div class="coming-soon" id="pizza-soon">
+        <span>🍕</span>
+        <span id="coming-soon-text">Σύντομα κοντά σας!</span>
+      </div>
+    </div>
+
+    <!-- BURGER -->
+    <div class="menu-section" id="burger">
+      <div class="section-header">
+        <span class="section-icon">🍔</span>
+        <span class="section-title" id="title-burger">BURGER</span>
+      </div>
+      <div class="menu-items" id="items-burger"></div>
+    </div>
+
+    <!-- DRINKS -->
+    <div class="menu-section" id="drinks">
+      <div class="section-header">
+        <span class="section-icon">🥤</span>
+        <span class="section-title" id="title-drinks">ΑΝΑΨΥΚΤΙΚΑ</span>
+      </div>
+      <div class="coming-soon" id="drinks-soon">
+        <span>🥤</span>
+        <span id="coming-soon-drinks">Σύντομα κοντά σας!</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <strong>PLATEA FAST FOOD</strong>
+    <p>Αποστόλου Ανδρέα 14, Κάτω Αχαΐα 25200</p>
+    <p>📞 2693023398 | 2693025350</p>
+    <p style="margin-top:8px; font-size:12px;">© 2026 Platea Fast Food. Με αγάπη από Κάτω Αχαΐα.</p>
+  </footer>
+
+<script>
+  const data = {
+    pita: [
+      { gr: "Πίτα Γύρο Χοιρινό", en: "Pork Gyro Pita", price: "€3.70" },
+      { gr: "Πίτα Γύρο Κοτόπουλο", en: "Chicken Gyro Pita", price: "€3.70" },
+      { gr: "Πίτα Σουβλάκι Χοιρινό", en: "Pork Souvlaki Pita", price: "€3.70" },
+      { gr: "Πίτα Σουβλάκι Κοτόπουλο", en: "Chicken Souvlaki Pita", price: "€3.70" },
+      { gr: "Πίτα Μπιφτέκι (Μοσχάρι, Κοτόπουλο)", en: "Burger Pita (Beef, Chicken)", price: "€3.70" },
+      { gr: "Πίτα Κεμπάπ", en: "Kebab Pita", price: "€3.70" },
+      { gr: "Πίτα Λουκάνικο", en: "Sausage Pita", price: "€3.70" },
+      { gr: "Πίτα Φιλέτο", en: "Fillet Pita", price: "€3.70" },
+      { gr: "Πίτα Κοτομπουκιές", en: "Chicken Bites Pita", price: "€3.70" },
+      { gr: "Πίτα Κοτομπέικον", en: "Chicken Bacon Pita", price: "€3.70" },
+    ],
+    sandwich: [
+      { gr: "Σάντουιτς Γύρο Χοιρινό", en: "Pork Gyro Sandwich", price: "€3.70" },
+      { gr: "Σάντουιτς Γύρο Κοτόπουλο", en: "Chicken Gyro Sandwich", price: "€3.70" },
+      { gr: "Σάντουιτς Σουβλάκι Χοιρινό", en: "Pork Souvlaki Sandwich", price: "€3.70" },
+      { gr: "Σάντουιτς Σουβλάκι Κοτόπουλο", en: "Chicken Souvlaki Sandwich", price: "€3.70" },
+      { gr: "Σάντουιτς Μπιφτέκι (Μοσχάρι, Κοτόπουλο)", en: "Burger Sandwich (Beef, Chicken)", price: "€3.70" },
+      { gr: "Σάντουιτς Κεμπάπ", en: "Kebab Sandwich", price: "€3.70" },
+      { gr: "Σάντουιτς Λουκάνικο", en: "Sausage Sandwich", price: "€3.70" },
+      { gr: "Σάντουιτς Φιλέτο", en: "Fillet Sandwich", price: "€3.70" },
+      { gr: "Σάντουιτς Κοτομπουκιές", en: "Chicken Bites Sandwich", price: "€3.70" },
+      { gr: "Σάντουιτς Κοτομπέικον", en: "Chicken Bacon Sandwich", price: "€3.70" },
+    ],
+    merides: [
+      { gr: "Μερίδα Γύρο Χοιρινό", en: "Pork Gyro Portion", price: "€8.50" },
+      { gr: "Μερίδα Γύρο Κοτόπουλο", en: "Chicken Gyro Portion", price: "€8.50" },
+      { gr: "Μερίδα Σουβλάκι Χοιρινό", en: "Pork Souvlaki Portion", price: "€8.50" },
+      { gr: "Μερίδα Σουβλάκι Κοτόπουλο", en: "Chicken Souvlaki Portion", price: "€8.50" },
+      { gr: "Μερίδα Μπιφτέκι (Μοσχάρι, Κοτόπουλο)", en: "Burger Portion (Beef, Chicken)", price: "€8.50" },
+      { gr: "Μερίδα Κεμπάπ", en: "Kebab Portion", price: "€8.50" },
+      { gr: "Μερίδα Λουκάνικο", en: "Sausage Portion", price: "€8.50" },
+      { gr: "Μερίδα Φιλέτο", en: "Fillet Portion", price: "€8.50" },
+      { gr: "Μερίδα Κοτομπουκιές", en: "Chicken Bites Portion", price: "€8.50" },
+      { gr: "Μερίδα Κοτομπέικον", en: "Chicken Bacon Portion", price: "€9.00" },
+    ],
+    salates: [
+      { gr: "Μαρούλι", en: "Lettuce Salad", price: "€3.50" },
+      { gr: "Εποχής", en: "Seasonal Salad", price: "€4.50" },
+      { gr: "Καίσαρα", en: "Caesar Salad", price: "€7.00" },
+      { gr: "Σεφ", en: "Chef's Salad", price: "€7.00" },
+      { gr: "Platea", en: "Platea Salad", price: "€7.00" },
+      { gr: "Χωριάτικη", en: "Greek Salad", price: "€7.00" },
+    ],
+    orektika: [
+      { gr: "Πατάτες", en: "French Fries", price: "€3.50" },
+      { gr: "Πατάτες με σως", en: "Fries with Sauce", price: "€4.50" },
+      { gr: "Πατάτες Platea", en: "Platea Special Fries", price: "€5.50" },
+      { gr: "Φέτα", en: "Feta Cheese", price: "€3.50" },
+      { gr: "Φέτα ψητή", en: "Grilled Feta", price: "€4.50" },
+      { gr: "Φέτα Μελένια", en: "Honey Feta", price: "€5.00" },
+      { gr: "Τυροπιτάκια", en: "Cheese Pies", price: "€3.50" },
+      { gr: "Σαγανάκι", en: "Saganaki", price: "€3.50" },
+    ],
+    spageti: [
+      { gr: "Ναπολιτέν", en: "Napolitaine", price: "€5.00" },
+      { gr: "Φούρνου", en: "Baked Pasta", price: "€7.00" },
+      { gr: "Καρμπονάρα", en: "Carbonara", price: "€7.00" },
+      { gr: "Con Pollo", en: "Con Pollo", price: "€7.50" },
+      { gr: "Pollo e Pomodoro", en: "Pollo e Pomodoro", price: "€7.50" },
+      { gr: "Linguini Pesto", en: "Linguini Pesto", price: "€7.50" },
+      { gr: "Linguini Μανιταριών", en: "Mushroom Linguini", price: "€7.50" },
+    ],
+    burger: [
+      { gr: "Απλό", en: "Plain Burger", price: "€4.50" },
+      { gr: "Special", en: "Special Burger", price: "€5.00" },
+      { gr: "Platea", en: "Platea Burger", price: "€6.50" },
+      { gr: "Boss", en: "Boss Burger", price: "€7.00" },
+      { gr: "Gyros", en: "Gyros Burger", price: "€7.50" },
+      { gr: "Chicken", en: "Chicken Burger", price: "€7.50" },
+      { gr: "American", en: "American Burger", price: "€7.50" },
+    ],
+  };
+
+  const translations = {
+    gr: {
+      tagline: "Γεύσεις που αγαπάς — Κάτω Αχαΐα",
+      hours: "Καθημερινά 11:00 – 01:00",
+      langBtn: "🇬🇧 English",
+      pita: "ΠΙΤΑ ΓΥΡΟ",
+      sandwich: "SANDWICH",
+      merides: "ΜΕΡΙΔΕΣ",
+      salates: "ΣΑΛΑΤΕΣ",
+      orektika: "ΟΡΕΚΤΙΚΑ",
+      spageti: "ΜΑΚΑΡΟΝΑΔΕΣ",
+      pizza: "PIZZA",
+      burger: "BURGER",
+      drinks: "ΡΟΦΗΜΑΤΑ",
+      comingSoon: "Σύντομα κοντά σας!",
+      callBtn: "Καλέστε μας",
+      navPita: "🥙 Πίτα Γύρο",
+      navSandwich: "🥪 Sandwich",
+      navMerides: "🍽️ Μερίδες",
+      navSalates: "🥗 Σαλάτες",
+      navOrektika: "🍟 Ορεκτικά",
+      navSpageti: "🍝 Μακαρονάδες",
+      navPizza: "🍕 Pizza",
+      navBurger: "🍔 Burger",
+      navDrinks: "🥤 Ροφήματα",
+    },
+    en: {
+      tagline: "Flavours you love — Kato Achaia",
+      hours: "Open Daily 11:00 – 01:00",
+      langBtn: "🇬🇷 Ελληνικά",
+      pita: "PITA GYRO",
+      sandwich: "SANDWICH",
+      merides: "PORTIONS",
+      salates: "SALADS",
+      orektika: "STARTERS",
+      spageti: "SPAGHETTI",
+      pizza: "PIZZA",
+      burger: "BURGER",
+      drinks: "DRINKS",
+      comingSoon: "Coming soon!",
+      callBtn: "Call us",
+      navPita: "🥙 Pita Gyro",
+      navSandwich: "🥪 Sandwich",
+      navMerides: "🍽️ Portions",
+      navSalates: "🥗 Salads",
+      navOrektika: "🍟 Starters",
+      navSpageti: "🍝 Spaghetti",
+      navPizza: "🍕 Pizza",
+      navBurger: "🍔 Burger",
+      navDrinks: "🥤 Drinks",
+    }
+  };
+
+  let currentLang = 'gr';
+
+  function renderItems(category, lang) {
+    const container = document.getElementById('items-' + category);
+    if (!container) return;
+    container.innerHTML = data[category].map(item => `
+      <div class="menu-item">
+        <div>
+          <div class="item-name">${lang === 'gr' ? item.gr : item.en}</div>
+          ${lang === 'gr' ? `<div class="item-name-en">${item.en}</div>` : ''}
+        </div>
+        <div class="item-price">${item.price}</div>
+      </div>
+    `).join('');
+  }
+
+  function renderAll(lang) {
+    const t = translations[lang];
+    document.getElementById('heroTagline').textContent = t.tagline;
+    document.getElementById('hoursText').textContent = t.hours;
+    document.getElementById('langBtn').textContent = t.langBtn;
+    document.getElementById('title-pita').textContent = t.pita;
+    document.getElementById('title-sandwich').textContent = t.sandwich;
+    document.getElementById('title-merides').textContent = t.merides;
+    document.getElementById('title-salates').textContent = t.salates;
+    document.getElementById('title-orektika').textContent = t.orektika;
+    document.getElementById('title-spageti').textContent = t.spageti;
+    document.getElementById('title-pizza').textContent = t.pizza;
+    document.getElementById('title-burger').textContent = t.burger;
+    document.getElementById('title-drinks').textContent = t.drinks;
+    document.getElementById('callBtnText').textContent = t.callBtn;
+    document.getElementById('coming-soon-text').textContent = t.comingSoon;
+    document.getElementById('coming-soon-drinks').textContent = t.comingSoon;
+    document.getElementById('nav-pita').textContent = t.navPita;
+    document.getElementById('nav-sandwich').textContent = t.navSandwich;
+    document.getElementById('nav-merides').textContent = t.navMerides;
+    document.getElementById('nav-salates').textContent = t.navSalates;
+    document.getElementById('nav-orektika').textContent = t.navOrektika;
+    document.getElementById('nav-spageti').textContent = t.navSpageti;
+    document.getElementById('nav-pizza').textContent = t.navPizza;
+    document.getElementById('nav-burger').textContent = t.navBurger;
+    document.getElementById('nav-drinks').textContent = t.navDrinks;
+
+    ['pita','sandwich','merides','salates','orektika','spageti','burger'].forEach(cat => renderItems(cat, lang));
+  }
+
+  function toggleLang() {
+    currentLang = currentLang === 'gr' ? 'en' : 'gr';
+    document.documentElement.lang = currentLang;
+    renderAll(currentLang);
+  }
+
+  // Initial render
+  renderAll('gr');
+
+  // Active nav highlight on scroll
+  const sections = document.querySelectorAll('.menu-section');
+  const navLinks = document.querySelectorAll('.menu-nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      if (window.scrollY >= section.offsetTop - 130) current = section.id;
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
